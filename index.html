@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new Cart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            /* Light grey */
+            border-top: 16px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            top: auto;
+            left: auto;
+            bottom: 0;
+            top: 0;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #div {
+            border: 1px solid green;
+            width: 50%;
+            height: 50px;
+            margin: 2rem auto;
+
+        }
+
+        #lp {
+            border: 1px solid green;
+            width: 100%;
+            display: flex;
+            height: 100px;
+            margin: 2rem auto;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 20px;
+            display: none;
+            background-color: blueviolet;
+            color: white;
+        }
+
+        #lp1 {
+
+            width: 100%;
+            display: flex;
+            height: 100px;
+            margin: 2rem auto;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 20px;
+            display: none;
+            background-color: blueviolet;
+            color: white;
+        }
+
+        #lp2 {
+
+            width: 100%;
+            display: flex;
+            height: 100px;
+            margin: 2rem auto;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 20px;
+            display: none;
+            background-color: blueviolet;
+            color: white;
+        }
+        #lp3 {
+
+width: 100%;
+display: flex;
+height: 100px;
+margin: 2rem auto;
+justify-content: space-evenly;
+align-items: center;
+font-size: 20px;
+display: none;
+background-color: blueviolet;
+color: white;
+}
+#lp4 {
+
+width: 100%;
+display: flex;
+height: 100px;
+margin: 2rem auto;
+justify-content: space-evenly;
+align-items: center;
+font-size: 20px;
+background-color: blueviolet;
+color: white;
+display: none;
+}
+#lp5 {
+
+width: 100%;
+display: flex;
+height: 100px;
+margin: 2rem auto;
+justify-content: space-evenly;
+align-items: center;
+font-size: 20px;
+background-color: blueviolet;
+color: white;
+display: none;
+}
+
+        #ad1 {
+            width: 50px;
+            border-radius: 50px;
+        }
+
+        ::-moz-selection {
+            /* Code for Firefox */
+            color: rgb(255, 181, 53);
+            background: rgb(3, 1, 1);
+        }
+
+        ::selection {
+            color: rgb(255, 181, 53);
+            background: rgb(3, 1, 1);
+
+        }
+
+        #list {
+            position: fixed;
+            z-index: 300;
+            border: 1px solid red;
+            height: 90vh;
+            width: 100%;
+            right: -120%;
+            background-color: white;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y:auto;
+
+        }
+
+        #check1 {
+            display: none;
+        }
+
+        #check1:checked~#list {
+            right: 0%;
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #nn {
+            display: flex;
+            align-items: center;
+        }
+
+        #ul1 {
+            display: flex;
+            justify-content: space-evenly;
+            width: 40rem;
+            align-items: center;
+
+        }
+
+        a {
+            font-size: 20px;
+            color: black;
+        }
+
+        #a1 {
+            text-decoration: none;
+        }
+
+        #nav1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 20px;
+
+        }
+
+        #scale:hover {
+            transform: scale(1.0, 1.0);
+        }
+
+        #cart {
+            width: 40px;
+        }
+
+        #nav2 {
+            width: 30rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+        #ul2 {
+            display: flex;
+            width: 20rem;
+            justify-content: space-evenly;
+
+        }
+
+        .a1 {
+            display: none;
+        }
+
+        #l22 {
+            display: none;
+        }
+
+        #menu {
+            width: 40px;
+            display: none;
+        }
+
+        #check {
+            display: none;
+        }
+
+        #l11 {
+            display: none;
+        }
+
+        #bg {
+            width: 100%;
+            position: relative;
+            height: 50rem;
+            overflow-x: hidden;
+
+        }
+
+        #pp {
+            position: relative;
+            width: 300%;
+            height: 50rem;
+            display: flex;
+            transition: all 2s;
+            overflow-x: hidden;
+            left: 0;
+        }
+
+        .bg1 {
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/10853637/pexels-photo-10853637.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        }
+
+        .bg2 {
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/1031955/pexels-photo-1031955.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        }
+
+        .bg3 {
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)), url("https://images.pexels.com/photos/2385477/pexels-photo-2385477.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        }
+
+        #if1 {
+            color: white;
+        }
+
+        #if1 {
+            width: 100%;
+            height: 15rem;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            color: rgb(222, 222, 222);
+            font-weight: bold;
+            transform: translateY(300px)
+        }
+
+        #if1 p {
+            font-size: 20px;
+            word-spacing: 15px;
+            width: 50%;
+            text-align: center;
+        }
+
+        #if1 h1 {
+            font-size: 50px;
+        }
+
+        #btn {
+            display: flex;
+            justify-content: space-evenly;
+            width: 500px;
+        }
+
+        #btn button {
+            width: 200px;
+            height: 50px;
+            border-radius: 20px;
+            border: none;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #about {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 3rem;
+
+        }
+
+        #ab1 img {
+            width: 500px;
+            height: 40rem;
+        }
+
+        #ab2 h3 {
+            color: orange;
+        }
+
+        #ab2 {
+            width: 30rem;
+            height: 30rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: auto 0;
+        }
+
+        #ab2 p {
+            width: 80%;
+            font-size: 20px;
+            text-align: justify;
+        }
+
+        #ab2 h2 {
+            font-size: 40px;
+            width: 80%;
+            text-align: center;
+        }
+
+        #shoe {
+
+            height: 40rem;
+            width: 180vh;
+            margin: 3rem auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #sp {
+            font-size: 40px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        #d1 {
+            display: flex;
+            width: 180vh;
+            margin-top: 1rem;
+            justify-content: space-evenly;
+        }
+
+        #s2 {
+            width: 250px;
+            margin-top: 2rem;
+            height: 27rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #s2 h4 {
+            color: orange;
+        }
+
+        #s2 p {
+            width: 100%;
+            font-size: 20px;
+            text-align: justify;
+        }
+
+        #s2 h3 {
+            font-size: 23px;
+        }
+
+        #p11 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 10rem;
+        }
+
+        #s4 {
+
+            width: 250px;
+            margin-top: 2rem;
+            height: 27rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #s4 h4 {
+            color: orange;
+        }
+
+        #s4 p {
+            width: 100%;
+            font-size: 20px;
+            text-align: justify;
+        }
+
+        #s4 h3 {
+            font-size: 23px;
+        }
+
+        #s4 {}
+
+        #seller {
+            width: 100rem;
+            height: 80rem;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            position: relative;
+        }
+
+        #sel1 p {
+            font-size: 20px;
+            text-transform: capitalize;
+            text-align: center;
+            margin: 2rem;
+        }
+
+        #sel2 {
+            width: 100rem;
+            height: 31rem;
+            display: flex;
+
+            justify-content: space-evenly;
+
+        }
+
+        #sel3 {
+            width: 100rem;
+            height: 31rem;
+            display: flex;
+
+            justify-content: space-evenly;
+        }
+
+        #bd {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 350px;
+            width: 500px;
+            background-color: rgba(239, 235, 235, 0.794);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #q {
+            background-color: black;
+            color: white;
+            width: 400px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+
+
+        #q11 {
+            background-color: black;
+            color: white;
+            width: 400px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #q11 p {
+            font-size: 20px;
+        }
+
+        #bd img {
+
+
+            width: 400px;
+            height: 310px;
+            position: absolute;
+
+        }
+
+        #sh1 {
+            display: flex;
+            flex-direction: column;
+            height: 30rem;
+            width: 400px;
+            justify-content: space-evenly;
+            font-size: 20px;
+        }
+
+        #of1 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #co1 {
+            font-size: 15px;
+            text-decoration-line: line-through;
+
+        }
+
+        #co2 {
+            font-size: 20px;
+        }
+
+        #bd1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 100px;
+        }
+
+        #of2 {
+            display: flex;
+            width: 150px;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #bd {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #sa1 {
+            display: flex;
+            justify-content: flex-end;
+            width: 430px;
+            z-index: 100;
+        }
+
+        #sale {
+            background-color: rgb(255, 178, 12);
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            margin-left: 50px;
+
+            position: absolute;
+        }
+
+        #cart1 {
+            width: 70px;
+            display: flex;
+        }
+
+        #cart1 p {
+            font-size: 20px;
+            margin-left: 10px;
+            height: 20px;
+            width: 30px;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            color: orange;
+        }
+
+        #q p {
+            font-size: 20px;
+        }
+
+        @media screen and (max-width:1700px) and (min-width:1000px) {
+
+            #q {
+                background-color: black;
+                color: white;
+                width: 300px;
+                height: 40px;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            #q11 {
+                background-color: black;
+                color: white;
+                width: 300px;
+                height: 40px;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            #seller {
+                width: 99%;
+                height: 80rem;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+            }
+
+            #sel2 {
+                width: 100%;
+            }
+
+            #sel3 {
+                width: 100%;
+            }
+
+            #sh1 {
+                display: flex;
+                flex-direction: column;
+                height: 30rem;
+                width: 300px;
+                justify-content: space-evenly;
+                font-size: 20px;
+            }
+
+            #bd {
+                width: 300px;
+            }
+
+            #sa1 {
+                width: 300px;
+            }
+
+            #bd img {
+
+
+                width: 300px;
+                height: 295px;
+                position: absolute;
+
+            }
+
+            #ul1 {
+                display: flex;
+                justify-content: space-evenly;
+                width: 30rem;
+                align-items: center;
+
+
+            }
+
+            #shoe {
+                height: 40rem;
+                width: 99%;
+                display: flex;
+                flex-direction: column;
+                margin: 0 auto;
+            }
+
+            #d1 {
+                width: 99%;
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            #s3 img {
+                width: 400px;
+                height: 500px;
+            }
+
+            #if1 p {
+                font-size: 20px;
+                word-spacing: 15px;
+                width: 90%;
+                text-align: center;
+            }
+
+            #ul2 {
+                display: flex;
+                justify-content: space-evenly;
+                width: 15rem;
+                align-items: center;
+
+            }
+
+            a {
+                font-size: 15px;
+                color: black;
+            }
+
+            #sym {
+                width: 100px;
+            }
+
+            #nav1 {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+            }
+
+            #cart {
+                width: 30px;
+            }
+
+            #nav2 {
+                width: 23rem;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+            }
+        }
+
+        @media screen and (max-width:999px) and (min-width:400px) {
+
+            label {
+                display: block;
+            }
+
+            #q {
+                background-color: black;
+                color: white;
+                width: 300px;
+                height: 40px;
+                display: none;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            #q11 {
+                background-color: black;
+                color: white;
+                width: 300px;
+                height: 40px;
+                display: none;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            #sel1 {
+                margin: 0;
+            }
+
+            #seller {
+                width: 99%;
+                height: 220rem;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #sel2 {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin: 0;
+                height: 150rem;
+                align-items: center;
+            }
+
+            #sel3 {
+
+                display: flex;
+                flex-direction: column;
+
+                width: 100%;
+                align-items: center;
+                height: 150rem;
+                margin: 0;
+            }
+
+            #sh1 {
+                display: flex;
+                flex-direction: column;
+                height: 500px;
+                width: 300px;
+                justify-content: space-evenly;
+                font-size: 20px;
+                align-items: center;
+            }
+
+
+            #bd1 {
+                width: 100%;
+            }
+
+            #sa1 {
+                width: 300px;
+            }
+
+            #bd {
+                width: 300px;
+                border: none;
+            }
+
+
+            #bd1 {
+                width: 300px;
+            }
+
+            #bd img {
+
+
+                width: 300px;
+                height: 295px;
+                position: absolute;
+
+            }
+
+
+            #if1 p {
+                font-size: 15px;
+                word-spacing: 15px;
+                width: 70%;
+                text-align: justify;
+            }
+
+            #if1 h1 {
+                font-size: 25px;
+            }
+
+            #if1 {
+                height: 25rem;
+            }
+
+            #btn {
+                display: flex;
+                justify-content: space-evenly;
+                flex-direction: column;
+                height: 10rem;
+                align-items: center;
+                width: 200px;
+            }
+
+            #btn button {
+                width: 200px;
+                height: 50px;
+                border-radius: 20px;
+                border: none;
+                font-size: 15px;
+                font-weight: bold;
+            }
+
+            #ul2 {
+                display: none;
+            }
+
+            #l22 {
+                display: block;
+            }
+
+            .a1 {
+                display: block;
+            }
+
+            #nav1 {
+                width: 50%;
+
+            }
+
+            #nn {
+                position: absolute;
+                background-color: rgb(202, 255, 237);
+                height: 100vh;
+                width: 100%;
+                top: 5rem;
+                left: -100%;
+                transition: all 2s;
+                z-index: 200;
+            }
+
+            #ul1 {
+                display: flex;
+                height: 100vh;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            #menu {
+                display: block;
+            }
+
+            #nav {
+                display: flex;
+                justify-content: space-evenly;
+                margin-top: 2rem;
+                width: 100%;
+            }
+
+            #nav1 {
+                width: 100px;
+            }
+
+            #nav2 {
+                width: 50px;
+            }
+
+            #sym {
+                width: 100px;
+            }
+
+            #cart {
+                width: 30px;
+            }
+
+            #menu {
+                width: 30px;
+            }
+
+            #check:checked~#nn {
+                left: 0%;
+            }
+
+            #about {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+                margin-top: 3rem;
+
+            }
+
+            #ab1 img {
+                width: 20rem;
+                height: 30rem;
+            }
+
+            #ab2 {
+                width: 20rem;
+            }
+
+            #ab2 p {
+                width: 100%;
+            }
+
+            #ab2 h2 {
+                width: 100%;
+                text-align: center;
+                font-size: 30px;
+            }
+
+            #shoe {
+                width: 99%;
+                height: 80rem;
+            }
+
+            #d1 {
+                width: 99%;
+                height: 70rem;
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+
+            #s4 {
+                width: 100%;
+                height: 20rem;
+            }
+
+            #s2 {
+                width: 100%;
+                height: 20rem;
+
+            }
+
+            #s3 img {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width:400px) and (min-width:390px) {
+            #q {
+                background-color: black;
+                color: white;
+                width: 300px;
+                height: 40px;
+                display: none;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            #q11 {
+                background-color: black;
+                color: white;
+                width: 300px;
+                height: 40px;
+                display: none;
+
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            #q1 p {
+                cursor: pointer;
+                font-size: 15px;
+            }
+
+            #q11 p {
+                cursor: pointer;
+                font-size: 15px;
+            }
+
+            label {
+                display: block;
+            }
+
+            #sel1 {
+                margin: 0;
+            }
+
+            #seller {
+                width: 99%;
+                height: 220rem;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #sel2 {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin: 0;
+                height: 150rem;
+                align-items: center;
+            }
+
+            #sel3 {
+
+                display: flex;
+                flex-direction: column;
+
+                width: 100%;
+                align-items: center;
+                height: 150rem;
+                margin: 0;
+            }
+
+            #sh1 {
+                display: flex;
+                flex-direction: column;
+                height: 500px;
+                width: 300px;
+                justify-content: space-evenly;
+                font-size: 20px;
+                align-items: center;
+            }
+
+
+            #bd1 {
+                width: 100%;
+            }
+
+            #sa1 {
+                width: 300px;
+            }
+
+            #bd {
+                width: 300px;
+                border: none;
+            }
+
+
+            #bd1 {
+                width: 300px;
+            }
+
+            #bd img {
+
+
+                width: 300px;
+                height: 295px;
+                position: absolute;
+
+            }
+
+
+
+
+
+            #ul2 {
+                display: none;
+            }
+
+            #l22 {
+                display: block;
+            }
+
+            .a1 {
+                display: block;
+            }
+
+            #nav1 {
+                width: 50%;
+
+            }
+
+            #nn {
+                position: absolute;
+                background-color: rgb(202, 255, 237);
+                height: 100vh;
+                width: 100%;
+                top: 5rem;
+                left: -100%;
+                z-index: 200;
+                transition: all 5s;
+            }
+
+            #ul1 {
+                display: flex;
+                height: 100vh;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            a {
+                font-size: 15px;
+
+            }
+
+            #menu {
+                display: block;
+            }
+
+            #nav {
+                display: flex;
+                justify-content: space-evenly;
+                margin-top: 2rem;
+                width: 100%;
+            }
+
+            #nav1 {
+                width: 50px;
+            }
+
+            #nav2 {
+                width: 50px;
+            }
+
+            #sym {
+                width: 50px;
+            }
+
+            #cart {
+                width: 20px;
+            }
+
+            #menu {
+                width: 20px;
+            }
+
+            #check:checked~#nn {
+                left: 0%;
+            }
+
+            #if1 p {
+                font-size: 15px;
+                word-spacing: 15px;
+                width: 70%;
+                text-align: justify;
+            }
+
+            #if1 h1 {
+                font-size: 20px;
+                text-align: center;
+            }
+
+            #if1 {
+                height: 25rem;
+            }
+
+            #btn {
+                display: flex;
+                justify-content: space-evenly;
+                flex-direction: column;
+                height: 10rem;
+                align-items: center;
+                width: 150px;
+            }
+
+            #btn button {
+                width: 150px;
+                height: 50px;
+                border-radius: 20px;
+                border: none;
+                font-size: 15px;
+                font-weight: bold;
+            }
+
+            #about {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+                margin-top: 3rem;
+
+            }
+
+            #ab1 {
+                display: flex;
+                justify-content: center;
+                border: none;
+            }
+
+            #ab1 img {
+                width: 99%;
+                height: 30rem;
+                display: flex;
+                justify-content: center;
+                border: none;
+
+            }
+
+            #ab2 {
+                width: 99%
+            }
+
+            #ab2 p {
+                width: 99%;
+                font-size: 15px;
+            }
+
+            #ab2 h2 {
+                width: 99%;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            #shoe {
+                width: 99%;
+                height: 80rem;
+            }
+
+            #d1 {
+                width: 99%;
+                height: 80rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 0;
+            }
+
+            #s4 {
+                width: 100%;
+                height: 20rem;
+            }
+
+            #s2 {
+                width: 100%;
+                height: 20rem;
+
+            }
+
+            #s3 img {
+                width: 100%;
+            }
+
+            #s4 h4 {
+                color: orange;
+            }
+
+            #s4 p {
+                width: 100%;
+                font-size: 15px;
+                text-align: justify;
+            }
+
+            #s4 h3 {
+                font-size: 17px;
+
+
+            }
+
+            #s2 p {
+                width: 100%;
+                font-size: 15px;
+                text-align: justify;
+            }
+
+            #s2 h3 {
+                font-size: 17px;
+
+
+            }
+
+            #sp {
+                font-size: 15px;
+            }
+        }
+
+        @media screen and (max-width:390px) and (min-width:200px) {
+
+
+            #list {
+                font-size: 10px;
+            }
+
+
+            #q11 {
+                background-color: black;
+                width: 170px;
+                height: 40px;
+
+                display: flex;
+                justify-content: space-evenly;
+
+
+            }
+
+            #q11 p {
+                font-size: 15px;
+            }
+
+            #q p {
+                font-size: 15px;
+                z-index: 200;
+                cursor: pointer;
+            }
+
+            label {
+                display: block;
+            }
+
+            #seller {
+                width: 99%;
+                height: 220rem;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #sel2 {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin: 0;
+                height: 150rem;
+                align-items: center;
+            }
+
+            #sel3 {
+
+                display: flex;
+                flex-direction: column;
+
+                width: 100%;
+                align-items: center;
+                height: 150rem;
+                margin: 0;
+            }
+
+            #sh1 {
+                display: flex;
+                flex-direction: column;
+                height: 400px;
+                width: 170px;
+                justify-content: space-evenly;
+                font-size: 20px;
+                align-items: center;
+            }
+
+
+            #bd1 {
+                width: 170px;
+            }
+
+            #sa1 {
+                width: 170px;
+
+            }
+
+            #bd {
+                width: 300px;
+            }
+
+            #of1 {
+                font-size: 10px;
+            }
+
+
+            #bd1 {
+                width: 170px;
+                font-size: 10px;
+            }
+
+            #bd img {
+
+
+                width: 170px;
+                height: 280px;
+                position: absolute;
+
+            }
+
+            #bd {
+                width: 170px;
+            }
+
+
+
+
+
+            #ul2 {
+                display: none;
+            }
+
+            #l22 {
+                display: block;
+            }
+
+            .a1 {
+                display: block;
+            }
+
+            #nav1 {
+                width: 50%;
+
+            }
+
+            #nn {
+                position: absolute;
+                background-color: rgb(202, 255, 237);
+                height: 100vh;
+                width: 100%;
+                top: 5rem;
+                left: -100%;
+                z-index: 200;
+                transition: all 5s;
+            }
+
+            #ul1 {
+                display: flex;
+                height: 100vh;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            a {
+                font-size: 15px;
+
+            }
+
+            #menu {
+                display: block;
+            }
+
+            #nav {
+                display: flex;
+                justify-content: space-evenly;
+                margin-top: 2rem;
+                width: 100%;
+            }
+
+            #nav1 {
+                width: 50px;
+            }
+
+            #nav2 {
+                width: 50px;
+            }
+
+            #sym {
+                width: 50px;
+            }
+
+            #cart {
+                width: 20px;
+            }
+
+            #menu {
+                width: 20px;
+            }
+
+            #check:checked~#nn {
+                left: 0%;
+            }
+
+            #if1 p {
+                font-size: 15px;
+                word-spacing: 15px;
+                width: 70%;
+                text-align: justify;
+            }
+
+            #if1 h1 {
+                font-size: 20px;
+                text-align: center;
+            }
+
+            #if1 {
+                height: 25rem;
+            }
+
+            #btn {
+                display: flex;
+                justify-content: space-evenly;
+                flex-direction: column;
+                height: 10rem;
+                align-items: center;
+                width: 150px;
+            }
+
+            #btn button {
+                width: 150px;
+                height: 50px;
+                border-radius: 20px;
+                border: none;
+                font-size: 15px;
+                font-weight: bold;
+            }
+
+            #about {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+                margin-top: 3rem;
+
+            }
+
+            #ab1 {
+                display: flex;
+                justify-content: center;
+                border: none;
+            }
+
+            #ab1 img {
+                width: 99%;
+                height: 30rem;
+                display: flex;
+                justify-content: center;
+                border: none;
+
+            }
+
+            #ab2 {
+                width: 99%
+            }
+
+            #ab2 p {
+                width: 99%;
+                font-size: 15px;
+            }
+
+            #ab2 h2 {
+                width: 99%;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            #shoe {
+                width: 99%;
+                height: 80rem;
+            }
+
+            #d1 {
+                width: 99%;
+                height: 80rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 0;
+            }
+
+            #s4 {
+                width: 100%;
+                height: 20rem;
+            }
+
+            #s2 {
+                width: 100%;
+                height: 20rem;
+
+            }
+
+            #s3 img {
+                width: 100%;
+            }
+
+            #s4 h4 {
+                color: orange;
+            }
+
+            #s4 p {
+                width: 100%;
+                font-size: 15px;
+                text-align: justify;
+            }
+
+            #s4 h3 {
+                font-size: 17px;
+
+
+            }
+
+            #s2 p {
+                width: 100%;
+                font-size: 15px;
+                text-align: justify;
+            }
+
+            #s2 h3 {
+                font-size: 17px;
+
+
+            }
+
+            #sp {
+                font-size: 15px;
+            }
+
+
+
+
+            #q {
+                background-color: black;
+                width: 170px;
+                height: 40px;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-evenly;
+                position: static;
+            }
+        }
+
+        @media screen and (max-width:500px) and (min-width:200px) {
+            #s3 img {
+                width: 100%;
+                height: 30rem;
+            }
+        }
+
+        @media screen and (max-width:400px) and (min-width:200px) {
+            #list p {
+                width: 100%;
+                font-size: 10px;
+            }
+
+
+
+            #ad1 {
+                width: 30px;
+            }
+        }
+
+        @media screen and (max-width:1000px) and (min-width:200px) {
+            #q11 {}
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+        <label for="check"> <img src="https://cdn-icons-png.flaticon.com/128/2976/2976215.png" id="menu"></label>
+        <div id="nav1">
+            <div id="logo">
+                <img src="https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/site-logo.svg"
+                    id="sym">
+            </div>
+        </div>
+        <input type="checkbox" id="check">
+        <div id="nn">
+            <ul id="ul1">
+                <li id="li1"><a href="#" id="a1">MEN</a></li>
+                <li id="li1"><a href="#" id="a1">WOMEN</a></li>
+                <li id="li1"><a href="#" id="a1">LOOKBOOK</a></li>
+                <li id="li1"><a href="#" id="a1">COLLECTION</a></li>
+                <li id="li1"><a href="#" id="a1">SALE</a></li>
+                <li id="l22"><a href="#" id="a1" class="a1">OUR STORY</a></li>
+                <li id="l22"><a href="#" id="a1" class="a1">CONTACT</a></li>
+            </ul>
+        </div>
+        <div id="nav2">
+            <ul id="ul2">
+                <li id="l2"><a href="#" id="a1">OUR STORY</a></li>
+                <li id="l2"><a href="#" id="a1">CONTACT</a></li>
+            </ul>
+            <div id="cart1">
+                <label for="check1"> <img src="https://cdn-icons-png.flaticon.com/128/3144/3144456.png"
+                        id="cart"></label>
+                <p id="count">0</p>
+            </div>
+        </div>
+    </div>
+    <input type="checkbox" id="check1">
+    <div id="list">
+        <p id="tot">0</p>
+        <div id="lp">
+            <div id="l1">
+                <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/194355/01/sv01/fnd/IND/fmt/png/SOFTRIDE-Sophia-Women's-Walking-Shoes"
+                    id="ad1">
+                <p id="nm">Women peach Training</p>
+            </div>
+            <div id="l2">
+                <p id="tot">Total shoes</p>
+                <p id="pc1">0</p>
+            </div>
+            <div id="l3">
+                <p id="nm1">cost</p>
+                <p id="f1">59.90$</p>
+            </div>
+        </div>
+        <div id="lp1">
+            <div id="l1">
+                <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/307137/08/sv01/fnd/IND/fmt/png/BMW-M-Motorsport-X-Ray-Speed-Unisex-Sneakers"
+                    id="ad1">
+                <p id="nm">men peach Training</p>
+            </div>
+            <div id="l2">
+                <p id="tot">Total shoes</p>
+                <p id="pc3">0</p>
+            </div>
+            <div id="l3">
+                <p id="nm1">cost</p>
+                <p id="f22">60.0$</p>
+            </div>
+        </div>
+        <div id="lp2">
+            <div id="l1">
+                <img src="https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-012-400x400.jpg"
+                    id="ad1">
+                <p id="nm">Women peach Training</p>
+            </div>
+            <div id="l2">
+                <p id="tot">Total shoes</p>
+                <p id="pc5">0</p>
+            </div>
+            <div id="l3">
+                <p id="nm1">cost</p>
+                <p id="f23">64.0$</p>
+            </div>
+        </div>
+        <div id="lp3">
+            <div id="l1">
+                <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/392758/01/sv01/fnd/IND/fmt/png/Puma-Robbin-Women's-Sneakers"
+                    id="ad1">
+                <p id="nm">Women peach Training</p>
+            </div>
+            <div id="l2">
+                <p id="tot">Total shoes</p>
+                <p id="pc7">0</p>
+            </div>
+            <div id="l3">
+                <p id="nm1">cost</p>
+                <p id="f24">79.90$</p>
+            </div>
+        </div>
+        <div id="lp4">
+            <div id="l1">
+                <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/387023/01/sv01/fnd/IND/fmt/png/PUMA-x-COCA-COLA-Rider-FV-Sneakers"
+                    id="ad1">
+                <p id="nm">Women peach Training</p>
+            </div>
+            <div id="l2">
+                <p id="tot">Total shoes</p>
+                <p id="pc9">0</p>
+            </div>
+            <div id="l3">
+                <p id="nm1">cost</p>
+                <p id="f25">80.90$</p>
+            </div>
+        </div>
+        <div id="lp5">
+            <div id="l1">
+                <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/106713/04/sv01/fnd/IND/fmt/png/PUMA-x-one8-22-FH-Rubber-Unisex-Cricket-Shoes"
+                    id="ad1">
+                <p id="nm">Women peach Training</p>
+            </div>
+            <div id="l2">
+                <p id="tot">Total shoes</p>
+                <p id="pc11">0</p>
+            </div>
+            <div id="l3">
+                <p id="nm1">cost</p>
+                <p id="f26">69.90$</p>
+            </div>
+        </div>
+    </div>
+    <div id="bg">
+        <div id="pp">
+            <div class="bg1 ct1" id="bg3">
+                <div id="if1">
+                    <h1>Love the Planet we walk on</h1>
+                    <p id="p1">Bibendum fermentum, aenean donec pretium aliquam blandit tempor imperdiet arcu arcu ut
+                        nunc in dictum mauris at ut.</p>
+                    <div id="btn">
+                        <button id="b1">SHOP MEN</button>
+                        <button id="b1">SHOP WOMEN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg2 ct2" id="bg3">
+                <div id="if1">
+                    <h1>Love the Planet we walk on</h1>
+                    <p id="p1">Bibendum fermentum, aenean donec pretium aliquam blandit tempor imperdiet arcu arcu ut
+                        nunc in dictum mauris at ut.</p>
+                    <div id="btn">
+                        <button id="b1">SHOP MEN</button>
+                        <button id="b1">SHOP WOMEN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg3 ct" id="bg3">
+                <div id="if1">
+                    <h1>Love the Planet we walk on</h1>
+                    <p id="p1">Bibendum fermentum, aenean donec pretium aliquam blandit tempor imperdiet arcu arcu ut
+                        nunc in dictum mauris at ut.</p>
+                    <div id="btn">
+                        <button id="b1">SHOP MEN</button>
+                        <button id="b1">SHOP WOMEN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="about">
+        <div id="ab1">
+            <img
+                src="https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-store-home-about-image.jpg">
+        </div>
+        <div id="ab2">
+            <h3>About us</h3>
+            <h2>Selected materials designed for comfort and sustainability</h2>
+            <p>Nullam auctor faucibus ridiculus dignissim sed et auctor sed eget auctor nec sed elit nunc, magna non
+                urna amet ac neque ut quam enim pretium risus gravida ullamcorper adipiscing at ut magna.</p>
+        </div>
+    </div>
+    <div id="shoe">
+        <div id="s1">
+            <p id="sp">See how your shoes are made</p>
+        </div>
+        <div id="d1">
+            <div id="s2">
+                <div id="p11">
+                    <h4> 01.</h4>
+                    <h3> Pet canvas</h3>
+                    <p> Morbi eget bibendum sit adipiscing morbi ac nisl vitae maecenas nulla cursus</p>
+                </div>
+                <div id="p11">
+                    <h4> 02.</h4>
+                    <h3> Algae foam + vegan glue</h3>
+                    <p> Morbi eget bibendum sit adipiscing morbi ac nisl vitae maecenas nulla cursus</p>
+                </div>
+            </div>
+            <div id="s3">
+                <img src="https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-store-how-shoes-are-made-image.png"
+                    id="sh">
+            </div>
+            <div id="s4">
+                <div id="p11">
+                    <h4> 01.</h4>
+                    <h3> Pet canvas</h3>
+                    <p> Morbi eget bibendum sit adipiscing morbi ac nisl vitae maecenas nulla cursus</p>
+                </div>
+                <div id="p11">
+                    <h4> 02.</h4>
+                    <h3> Algae foam + vegan glue</h3>
+                    <p> Morbi eget bibendum sit adipiscing morbi ac nisl vitae maecenas nulla cursus</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="seller">
+        <div id="sel1">
+            <p>OUR BEST seller</p>
+        </div>
+        <div id="sel2">
+            <div id="sh1">
+                <div id="bd">
+                    <div id="sa1">
+                        <div id="sale">
+                            sale
+                        </div>
+                    </div>
+                    <img
+                        src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/194355/01/sv01/fnd/IND/fmt/png/SOFTRIDE-Sophia-Women's-Walking-Shoes ">
+                    <div id="q">
+                        <p id="plus">+</p>
+                        <p id="pc">0</p>
+                        <p id="q1">quick review</p>
+                        <p id="minus">-</p>
+
+                    </div>
+                </div>
+                <div id="bd1">
+                    <p id="of1">Women’s Blue Training</p>
+                    <div id="of2">
+                        <p id="co1"> $69.90</p>
+                        <p id="co2">$59.90</p>
+                    </div>
+                </div>
+            </div>
+            <div id="sh1">
+                <div id="bd">
+                    <div id="sa1">
+                    </div>
+                    <img
+                        src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/307137/08/sv01/fnd/IND/fmt/png/BMW-M-Motorsport-X-Ray-Speed-Unisex-Sneakers">
+
+                    <div id="q11">
+                        <p id="plus1">+</p>
+                        <p id="pc2">0</p>
+                        <p id="q2">quick review</p>
+                        <p id="minus1">-</p>
+                    </div>
+                </div>
+                <div id="bd1">
+                    <p id="of1">men's green running</p>
+                    <div id="of2">
+                        <p id="co2">$60.00</p>
+                    </div>
+                </div>
+            </div>
+            <div id="sh1">
+                <div id="bd">
+                    <div id="sa1">
+
+                    </div>
+                    <img
+                        src="https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-012-400x400.jpg">
+                    <div id="q11">
+                        <p id="plus2">+</p>
+                        <p id="pc4">0</p>
+                        <p id="q4">quick review</p>
+                        <p id="minus2">-</p>
+                    </div>
+                </div>
+                <div id="bd1">
+                    <p id="of1">Women’s Tosca City Run</p>
+                    <div id="of2">
+                        <p id="co2">$64.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sel3">
+            <div id="sh1">
+                <div id="bd">
+                    <div id="sa1">
+                       
+                    </div>
+                    <img
+                        src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/392758/01/sv01/fnd/IND/fmt/png/Puma-Robbin-Women's-Sneakers">
+                    <div id="q11">
+                        <p id="plus3">+</p>
+                        <p id="pc6">0</p>
+                        <p id="q5">quick review</p>
+                        <p id="minus3">-</p>
+                    </div>
+                </div>
+                <div id="bd1">
+                    <p id="of1">Women’s Blue Training</p>
+                    <div id="of2">
+                        <p id="co2"> $79.90</p>
+                    </div>
+                </div>
+            </div>
+            <div id="sh1">
+                <div id="bd">
+                    <div id="sa1">
+                        <div id="sale">
+                            sale
+                        </div>
+                    </div>
+                    <img
+                        src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/387023/01/sv01/fnd/IND/fmt/png/PUMA-x-COCA-COLA-Rider-FV-Sneakers">
+                    <div id="q11">
+                        <p id="plus4">+</p>
+                        <p id="pc8">0</p>
+                        <p id="q6">quick review</p>
+                        <p id="minus4">-</p>
+                    </div>
+                </div>
+                <div id="bd1">
+                    <p id="of1">men’s Blue Training</p>
+                    <div id="of2">
+                        <p id="co1"> $90.90</p>
+                        <p id="co2">$80.90</p>
+                    </div>
+                </div>
+            </div>
+            <div id="sh1">
+                <div id="bd">
+                    <div id="sa1">
+                        
+                    </div>
+                    <img
+                        src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/106713/04/sv01/fnd/IND/fmt/png/PUMA-x-one8-22-FH-Rubber-Unisex-Cricket-Shoes">
+                    <div id="q">
+                        <p id="plus5">+</p>
+                        <p id="pc10">0</p>
+                        <p id="q7">quick review</p>
+                        <p id="minus5">-</p>
+                    </div>
+                </div>
+                <div id="bd1">
+                    <p id="of1">men’s Blue Training</p>
+                    <div id="of2">
+                        <p id="co2"> $69.90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loader"></div>
+    </div>
+
+
+    <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
