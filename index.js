@@ -580,7 +580,7 @@ l.innerText=nu2+"$";
        if(i1==0)
        {
            let n9=0;
-           n9=nu2-64;
+           n9=nu2-60;
            l.innerText=n9+'$'   
        } 
 
