@@ -559,7 +559,7 @@ console.log("total2:"+total2);
 if(i==0)
 {
     let n2=0;
-    n2=nu2-64;
+    n2=nu1-59.90;
     l.innerText=n2+'$'
 }
 }
