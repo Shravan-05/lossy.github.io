@@ -535,6 +535,7 @@ function total1()
     
     n=total2+total3+total4+total5+total6+total7;
 nu1=n;
+nu2=n;
 pre=n;
 j1=n;
 j2=n;
